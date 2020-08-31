@@ -1,15 +1,18 @@
 import React from 'react'
-import { mount } from 'enzyme'
+import { render, getByText } from '@testing-library/react'
+
 import Profile from './Profile'
 
 describe('<Profile />', () => {
     it('matches snapshot', () => {
-        const wrapper = mount(<Profile username="Duduling" name="두둘링" />)
-        expect(wrapper).toMatchSnapshot()
+        const { container } = render(<Profile username="Duduling" name="두들링" />)
+        expect(container).toMatchSnapshot()
     })
-    it('renders username and name', () => {
-        const wrapper = mount(<Profile username="Duduling" name="두둘링" />)
-        expect(wrapper.props().username).toBe('Duduling')
-        expect(wrapper.props().name).toBe('두둘링')
+    it('shows ther props correctly', () => {
+        const { container } = render(<Profile usename={'Duduling'} name={'두들링'} />)
+
+        getByText(container, 'Duduling')
+        getByText(container, '(두들링)')
+        getByText(container, /김/)
     })
 })

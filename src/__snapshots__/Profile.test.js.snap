@@ -1,19 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Profile /> matches snapshot 1`] = `
-<Profile
-  name="두둘링"
-  username="Duduling"
->
+<div>
   <div>
     <b>
       Duduling
     </b>
     <span>
       (
-      두둘링
+      두들링
       )
     </span>
   </div>
-</Profile>
+</div>
 `;
