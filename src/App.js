@@ -1,12 +1,8 @@
 import React from 'react'
-import Profile from './Profile'
+import Counter from './Counter'
 
-function App() {
-  return (
-    <div>
-      <Profile username={'Duduling'} name={'두둘링'} />
-    </div>
-  )
+const App = () => {
+  return <Counter />
 }
 
 export default App

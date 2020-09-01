@@ -1,40 +1,37 @@
 import React from 'react'
-import { shallow } from 'enzyme'
+import { render, fireEvent } from '@testing-library/react'
 import Counter from './Counter'
 
-describe('<Counter />', () => {
-    it('matches snapshot', () => {
-        const wrapper = shallow(<Counter />)
-        expect(wrapper).toMatchSnapshot()
+describe('<Counter/>', () => {
+    it('match snapshot', () => {
+        const { container } = render(<Counter />)
+        expect(container).toMatchSnapshot()
     })
-    it('has initial number', () => {
-        const wrapper = shallow(<Counter />)
-        expect(wrapper.state().number).toBe(0)
+    it('has a number and tow button', () => {
+        const utils = render(<Counter />)
+
+        utils.getByText('0')
+        utils.getByText('+1')
+        utils.getByText('-1')
     })
-    it('increments', () => {
-        const wrapper = shallow(<Counter />)
-        wrapper.instance().handleIncrease()
-        expect(wrapper.state().number).toBe(1)
+    it('increases', () => {
+        const utils = render(<Counter />)
+        const number = utils.getByText('0')
+        const plusButton = utils.getByText('+1')
+
+        fireEvent.click(plusButton)
+        fireEvent.click(plusButton)
+
+        expect(number).toHaveTextContent('2')
     })
-    it('decrements', () => {
-        const wrapper = shallow(<Counter />)
-        wrapper.instance().handleDecrease()
-        expect(wrapper.state().number).toBe(-1)
-    })
-    it('calls handleIncrements', () => {
-        const wrapper = shallow(<Counter />)
-        const plusButton = wrapper.findWhere(
-            node => node.type() === 'button' && node.text() === '+1'
-        )
-        plusButton.simulate('click')
-        expect(wrapper.state().number).toBe(1)
-    })
-    it('calls handleDecrements', () => {
-        const wrapper = shallow(<Counter />)
-        const minusButton = wrapper.findWhere(
-            node => node.type() === 'button' && node.text() === '-1'
-        )
-        minusButton.simulate('click')
-        expect(wrapper.state().number).toBe(-1)
+    it('decreases', () => {
+        const utils = render(<Counter />)
+        const number = utils.getByText('0')
+        const minusButton = utils.getByText('-1')
+
+        fireEvent.click(minusButton)
+        fireEvent.click(minusButton)
+
+        expect(number).toHaveTextContent('-2')
     })
 })
