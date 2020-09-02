@@ -1,5 +1,9 @@
 import React, { useState } from 'react'
-import { render } from 'react-dom'
+import PropTypes from 'prop-types'
+
+TodoForm.propsTypes = {
+    onInsert: PropTypes.func
+}
 
 function TodoForm({ onInsert }) {
     const [inputValue, setInputValue] = useState('')
