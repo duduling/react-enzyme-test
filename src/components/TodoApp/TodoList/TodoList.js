@@ -1,9 +1,18 @@
 import React from 'react'
-import TodoItem from '../TodoItem/TodoItem'
+import { PropTypes } from 'prop-types'
 
-const TodoList = ({ todos, onToggle, onRemove }) => {
+import TodoItem from '../TodoItem/TodoItem'
+import { TodosTypes } from '../TodoItem/TodoItemPropTypes'
+
+TodoList.propTypes = {
+    todos: PropTypes.arrayOf(TodosTypes),
+    onToggle: PropTypes.func,
+    onRemove: PropTypes.func,
+}
+
+function TodoList({ todos, onToggle, onRemove }) {
     return (
-        <ul>
+        <ul data-testid={'TodoList'}>
             {todos.map(todo => {
                 return <TodoItem key={todo.id} todo={todo} onToggle={onToggle} onRemove={onRemove} />
             })}
