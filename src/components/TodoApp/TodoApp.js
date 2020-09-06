@@ -18,7 +18,7 @@ function TodoApp() {
     ])
 
     const onInsert = text => {
-        setTodos([...todos, {
+        setTodos(todos => [...todos, {
             id: (todos[todos.length - 1]?.id + 1) || 1,
             text,
             done: false
